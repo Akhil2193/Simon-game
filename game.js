@@ -6,13 +6,13 @@ let levelNumber = 0;
 
 
 function nextSequence() {
-    userClickPattern=[];
+    userClickPattern = [];
     const randomNumber = Math.floor(Math.random() * 4);
 
     const randomChosenColour = buttoncolours[randomNumber];
 
     gamepattern.push(randomChosenColour);
-    
+
     $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
 
     playsound(randomChosenColour);
@@ -55,13 +55,15 @@ function animatepress(currentColor) {
     }, 100);
 }
 
-let keypressTime = 0;
+let keypressTime = false;
 $(document).keypress(function () {
-    keypressTime++;
-    if (keypressTime == 1) {
+    // keypressTime++;
+    if (!keypressTime) {
+        setTimeout(() => {
+            nextSequence();
 
-        nextSequence();
-
+        }, 300);
+        keypressTime = true;
     }
 
 });
